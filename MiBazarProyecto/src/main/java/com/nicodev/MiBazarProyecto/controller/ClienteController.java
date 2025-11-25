@@ -41,7 +41,18 @@ public class ClienteController {
     }
 
     // PUT/EDIT un cliente (por id)
-
+    @PutMapping("clientes/editar/{cliente_id}")
+    public Cliente editCliente(@PathVariable(required = false, name = "cliente_id") Long cliente_id,
+                               @RequestParam(required = false, name = "nombre") String nombre_nue,
+                               @RequestParam(required = false, name = "apellido") String apellido_nue,
+                               @RequestParam(required = false, name = "dni") Long dni_nue) {
+        // le paso el id para buscar y nuevos valores para modificar
+        clienteServ.editCliente(cliente_id,nombre_nue,apellido_nue,dni_nue);
+        // busco el objeto modificado
+        Cliente cli = clienteServ.getCliente(cliente_id);
+        // lo devuelvo
+        return cli;
+    }
 
 
 
