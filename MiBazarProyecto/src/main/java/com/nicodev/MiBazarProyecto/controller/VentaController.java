@@ -52,9 +52,9 @@ public class VentaController {
         return ventaServ.editVenta(codigo_venta,venta);
     }
    //5. traer todos los productos de una determinada venta.
-    @GetMapping("ventas/productos/{codigo_producto}")
-    public List<Producto> traerListaProductos (@PathVariable Long codigo_producto){
-        return ventaServ.traerListaProducto(codigo_producto);
+    @GetMapping("ventas/productos/{codigo_venta}")
+    public List<Producto> traerListaProductos (@PathVariable Long codigo_venta){
+        return ventaServ.traerListaProducto(codigo_venta);
     }
 
     //6. Obtener la sumatoria del monto y tambien la cantidad de ventas de un determiando dia.

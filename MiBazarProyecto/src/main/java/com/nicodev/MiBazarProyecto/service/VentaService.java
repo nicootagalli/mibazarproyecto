@@ -86,11 +86,11 @@ public class VentaService implements IVentaService{
 
     //5. traer todos los productos de una determinada venta.
     @Override
-    public List<Producto> traerListaProducto(Long codigo_producto) {
+    public List<Producto> traerListaProducto(Long codigo_venta) {
         // creo la lista que voy a devolver
         List<Producto> listaProductos = new ArrayList<>();
         // creo una instancia de venta del id recibido.
-        Venta venta = this.getVenta(codigo_producto);
+        Venta venta = this.getVenta(codigo_venta);
 
         for (Item item : venta.getListaItems()) {
             listaProductos.add(item.getUnProducto());

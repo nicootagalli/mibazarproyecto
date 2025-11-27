@@ -54,6 +54,7 @@ public class ProductoService implements IProductoService{
     }
 
     // 4. Obtener todos los productos cuya cantidad disponible sea menor a 5
+    // Metodo implementado con una Query especial. (En Producto / Repository)
     @Override
     public List<Producto> traerProductoEscaso() {
         return produRepo.traerProductoEscaso();

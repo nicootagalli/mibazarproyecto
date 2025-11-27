@@ -28,7 +28,7 @@ public interface IVentaService {
     public Venta editVenta(Long codigo_venta, Venta venta);
 
     //5. traer todos los productos de una determinada venta.
-    public List<Producto> traerListaProducto(Long codigo_producto);
+    public List<Producto> traerListaProducto(Long codigo_venta);
 
     //6. Obtener la sumatoria del monto y tambien la cantidad de ventas de un determiando dia.
     public MontoPorDiaDTO traerMontoPorDia(LocalDate fecha_venta);
