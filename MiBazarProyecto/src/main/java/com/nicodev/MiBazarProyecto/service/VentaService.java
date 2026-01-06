@@ -2,6 +2,7 @@ package com.nicodev.MiBazarProyecto.service;
 
 import com.nicodev.MiBazarProyecto.dto.MejorVentaDTO;
 import com.nicodev.MiBazarProyecto.dto.MontoPorDiaDTO;
+import com.nicodev.MiBazarProyecto.exception.NotFoundException;
 import com.nicodev.MiBazarProyecto.model.Cliente;
 import com.nicodev.MiBazarProyecto.model.Item;
 import com.nicodev.MiBazarProyecto.model.Producto;
@@ -56,12 +57,15 @@ public class VentaService implements IVentaService{
     // EDIT VENTA
     @Override
     public Venta getVenta(Long codigo_venta) {
-        return ventaRepo.findById(codigo_venta).orElse(null);
+        return ventaRepo.findById(codigo_venta).orElseThrow(() -> new NotFoundException("Venta no encontrada"));
     }
 
     // DELETE
     @Override
     public void deleteVenta(Long codigo_venta) {
+        if(!ventaRepo.existsById(codigo_venta)){
+            throw new NotFoundException("Venta a eliminar no encontrada");
+        }
         ventaRepo.deleteById(codigo_venta);
     }
 

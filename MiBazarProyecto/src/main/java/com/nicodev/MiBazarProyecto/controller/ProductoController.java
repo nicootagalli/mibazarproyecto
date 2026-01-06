@@ -45,7 +45,7 @@ public class ProductoController {
                                  @RequestParam(required = false, name = "nombre") String nombre_nue,
                                  @RequestParam(required = false, name = "marca") String marca_nue,
                                  @RequestParam(required = false, name = "costo") Double costo_nue,
-                                 @RequestParam(required = false, name = "cantidad_disponible") Double cant_dis_nue) { // me pide que sea Double
+                                 @RequestParam(required = false, name = "cantidad_disponible") Integer cant_dis_nue) { // Integer = Wrapper, acepta Null.
 
         // Envio el codigo original (para buscar) y envio nuevos datos para modificar.
         produService.editProducto(codigo_producto, nombre_nue, marca_nue, costo_nue, cant_dis_nue);

@@ -1,5 +1,6 @@
 package com.nicodev.MiBazarProyecto.service;
 
+import com.nicodev.MiBazarProyecto.exception.NotFoundException;
 import com.nicodev.MiBazarProyecto.model.Cliente;
 import com.nicodev.MiBazarProyecto.repository.IClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +30,15 @@ public class ClienteService implements IClienteService{
     // GET un cliente (por id)
     @Override
     public Cliente getCliente(Long cliente_id) {
-        return clienteRepo.findById(cliente_id).orElse(null);
+        return clienteRepo.findById(cliente_id).orElseThrow(() -> new NotFoundException("Cliente no encontrado"));
     }
 
     // DELETE un cliente (por id)
     @Override
     public void deleteCliente(Long cliente_id) {
+        if(!clienteRepo.existsById(cliente_id)){
+            throw new NotFoundException("Cliente a eliminar no encontrado");
+        }
         clienteRepo.deleteById(cliente_id);
     }
 

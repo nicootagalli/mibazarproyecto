@@ -1,5 +1,6 @@
 package com.nicodev.MiBazarProyecto.service;
 
+import com.nicodev.MiBazarProyecto.exception.NotFoundException;
 import com.nicodev.MiBazarProyecto.model.Producto;
 import com.nicodev.MiBazarProyecto.repository.IProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,20 +29,24 @@ public class ProductoService implements IProductoService{
     // GET un producto en particular (por ID)
     @Override
     public Producto getProducto(Long codigo_producto) {
-        return produRepo.findById(codigo_producto).orElse(null);
+        return produRepo.findById(codigo_producto).orElseThrow(() -> new NotFoundException("Producto no encontrado"));
     }
 
     // DELETE un producto (por ID)
     @Override
     public void deleteProducto(Long codigo_producto) {
+        if (!produRepo.existsById(codigo_producto)) {
+            throw new NotFoundException("Producto a eliminar no encontrado");
+        }
         produRepo.deleteById(codigo_producto);
     }
 
+
     // PUT/EDIT un producto (por ID)
     @Override
-    public void editProducto(Long codigo_producto, String nombre_nue, String marca_nue, Double costo_nue, Double cant_dis_nue) {
+    public void editProducto(Long codigo_producto, String nombre_nue, String marca_nue, Double costo_nue, Integer cant_dis_nue) {
         // busco el objeto original
-        Producto producto = this.getProducto(codigo_producto);
+        Producto producto = this.getProducto(codigo_producto); // Implementa la excepcion al llamar al getProducto.
 
         // modifico sus nuevos valores requeridos.
         if (nombre_nue != null) producto.setNombre(nombre_nue);
